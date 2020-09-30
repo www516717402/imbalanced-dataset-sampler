@@ -53,8 +53,7 @@ class ImbalancedDatasetSampler(torch.utils.data.sampler.Sampler):
             raise NotImplementedError
                 
     def __iter__(self):
-        return (self.indices[i] for i in torch.multinomial(
-            self.weights, self.num_samples, replacement=True))
+        iter(torch.multinomial(self.weights, self.num_samples, replacement=True).tolist())
 
     def __len__(self):
         return self.num_samples
